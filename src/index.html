@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500&display=swap" rel="stylesheet">
+  <title>Adtuo Frontend Test</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__menu">
+      <div class="header__logo">
+        <img src="./src/images/the-movie-logo.png" alt="the movie db" />
+      </div>
+      <nav class="header__nav">
+        <ul class="nav__list">
+          <li>discover</li>
+          <li>movies</li>
+          <li>tv shows</li>
+          <li>people</li>
+          <li>community</li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header__user-img">
+      <img src="./src/images/portrait.jpg" alt="user image" />
+    </div>
+  </header>
+  <main class="main">
+    <h2>discover</h2>
+    <section class="section__search">
+      <form class="form" action="" id="searchForm">
+        <input class="form__input" type="text" id="inputSearch" placeholder="Search for a movie, tv show, person..." />
+        <button class="form__button" type="button" id="btnSearch"> search</button>
+      </form>
+    </section>
+    <section class="section__list-results" id="resultsContainer">
+      <ul class="result__list" id="resultList"></ul>
+    </section>
+  </main>
+</body>
+
+</html>

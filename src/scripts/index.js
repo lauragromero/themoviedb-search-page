@@ -1,20 +1,17 @@
 'use strict';
+
 import '../styles/index.scss';
 
 const elementInput = document.querySelector ('#inputSearch');
 const elementForm = document.querySelector('#searchForm');
-//const elementContainResults = document.querySelector ('#resultsContainer');
 const elementButtonSearch= document.querySelector('#btnSearch');
 const elementUlResults= document.querySelector('#resultList');
 const api_key= 'bb6f51bef07465653c3e553d6ab161a8';
 const urlBase = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=`;
 const imgDefault = 'https://via.placeholder.com/210x295/ffffff/666666/? text=TV.';
 
-
-
 //conectar con la api
-
-const conectSearchHandler = () =>{
+function conectSearchHandler (){
     const inputSearchValue = elementInput.value.toLowerCase(); 
     fetch(urlBase + inputSearchValue)
     .then (response => response.json())
@@ -23,54 +20,55 @@ const conectSearchHandler = () =>{
         notFoundMessage(dataFromSearch);
     });
 };
-// funcion no encontrado
 
+// función para que que el caso de que no encuentre resultados se muestre un mensaje
 function notFoundMessage(data){
     if(data.results.length === 0){
         const elementNotFound = document.createElement('p');
         elementNotFound.setAttribute('class', 'error-message');
         elementNotFound.innerHTML= 'No results';
         elementUlResults.appendChild(elementNotFound);
-    };
-    
+    };  
 };
 
-//pintar la lista de peliculas que sale de la búsqueda, se crea un <li> por cada item que nos llega de la API
+//pintar la lista de películas que nos da la api de la búsqueda
 function showSearchResults (data){
     const results= data.results;
  for (const result of results){
+    //se crea un elemento <li>
     const createElementLi = document.createElement ('li');
     createElementLi.classList.add('li__search');
+    //se crea un elemento <div> para contener a la imagen
     const createElementDiv= document.createElement('div');
     createElementDiv.setAttribute('class', 'img__container');
+    //se crea un elemento <img>
     const createElementImg = document.createElement ('img');
+    //se crea un elemento <h3> para el título
     const createElementTitle = document.createElement ('h3');
     createElementTitle.innerHTML= result.title;
-   
+   //se crean dos elementos <p> para la infomación del argumento
     const createElementText= document.createElement('p');
     createElementText .setAttribute ('class', 'description__result');
     const elementTextHidden = document.createElement('p');
     elementTextHidden .setAttribute ('class', 'hidden');
-
+    //se crea un elemento <span> para la fecha
     const createElementSpan= document.createElement('span');
     createElementSpan.setAttribute('class', 'result__date');
-
+    //se crea un elemento <div> que contiene a todos los elementos de texto
     const elementTextContainer= document.createElement('div');
     elementTextContainer.setAttribute('class', 'result__container-text');
-
+    //se crea un elemento <span> para desplegar la opción de leer más
     const readMoreLink= document.createElement('span');
     readMoreLink.innerHTML= 'Read more';
     readMoreLink.setAttribute('class', 'result__link-more');
     
     createElementDiv.appendChild(createElementImg);
     createElementLi.appendChild(createElementDiv);
-
     elementTextContainer.appendChild(createElementTitle);
     elementTextContainer.appendChild(createElementSpan);
     elementTextContainer.appendChild(createElementText);
     elementTextContainer.appendChild(elementTextHidden);
     elementTextContainer.appendChild(readMoreLink);
-
     createElementLi.appendChild(elementTextContainer);
     elementUlResults.appendChild(createElementLi); 
     
@@ -81,7 +79,7 @@ function showSearchResults (data){
  };
 };
 
-//trasnformar fecha en formato mes, dia y año
+//trasnformar fecha en formato mes, día y año
 function transformDate(dateMovie, spanDate){
     const months=[
         'January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December'
@@ -101,10 +99,10 @@ function readMoreInformation(){
         button.addEventListener('click', addMore);
     }  
 };
+
 // función que hace que se despiliege más infomación al pulsar al Read More
 function addMore(event){
     const elementReadMore= event.currentTarget;
-
     if(elementReadMore.innerHTML === 'Read more'){
         elementReadMore.innerHTML = 'Read less';
     }else{
@@ -116,12 +114,13 @@ function addMore(event){
     elementPVisible.classList.toggle('hidden');
     const eventLiParent= event.currentTarget.closest('li');
     eventLiParent.classList.toggle('new-size');
-}
-// longitud de parrafo
-function textLengt(text, innerP, hiddenText){
+};
+
+// longitud de párrafo
+function textLengt(text, textDefault, hiddenText){
     if(text.length > 100){
         const textVisible= text.substr(0, 140) + '...';
-        innerP.innerHTML= textVisible;
+        textDefault.innerHTML= textVisible;
         hiddenText.innerHTML = text;
     }
 };
@@ -132,20 +131,18 @@ function defaultImage(pathImage, elementImg){
     }else{
         elementImg.src= `https://image.tmdb.org/t/p/w500/${pathImage}`;
     }
-}
-//funcion nueva búsqueda
+};
+//función nueva búsqueda
 function removeSearch() {
     if(elementUlResults.innerHTML !== ''){
         elementUlResults.innerHTML = '';
     }
 };
-
-//funcion para que funcione la busqueda con el evento enter
+//función para que funcione la búsqueda pulsando la tecla enter
 function enterKeySearchHandler (event){
     event.preventDefault();
     conectSearchHandler();
 };
-
 
 elementInput.addEventListener ('change',removeSearch);
 elementForm.addEventListener ('submit', enterKeySearchHandler );

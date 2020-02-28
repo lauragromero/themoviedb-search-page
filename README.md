@@ -6,7 +6,7 @@ La página es un buscador de películas, usando la API pública de The Movie DB 
 
 Al introducir en el buscador el nombre de una película o serie y hacer click sobre el botón Search, hacemos una petición a esta api, que nos va a devolver un listado de pilículas o series que coinciden con el nombre de esta búsqueda. Además si queremos más información sobre el argumento, podemos pulsar en el Read more y se despliega el resto de la información. 
 
-Se ha realizado  usando para la maquetación siguiendo el diseño dado, con HTML y SASS, y para para la parte dinámica Javascript. 
+Se ha realizado usando HTML y SASS, para la maquetación siguiendo el diseño dado, y para para la parte dinámica Javascript. 
 
 ## Instalación e inicio
 

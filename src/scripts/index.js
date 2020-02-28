@@ -1,5 +1,4 @@
 'use strict';
-
 import '../styles/index.scss';
 
 const elementInput = document.querySelector ('#inputSearch');
@@ -21,7 +20,7 @@ function conectSearchHandler (){
     });
 };
 
-// función para que que el caso de que no encuentre resultados se muestre un mensaje
+// Muestra un mensaje en caso de que ningún resulado coincida
 function notFoundMessage(data){
     if(data.results.length === 0){
         const elementNotFound = document.createElement('p');
@@ -92,7 +91,7 @@ function transformDate(dateMovie, spanDate){
     spanDate.innerHTML= fullDate;
 };
 
-//función que recorre todos los botones de Read more, para que se ejecute el evento en cada uno.  
+//Recorrer todos los botones de Read more, para que se ejecute el evento en cada uno.  
 function readMoreInformation(){
     const allBtnRead= document.querySelectorAll('.result__link-more');
     for (const button of allBtnRead) {
@@ -100,7 +99,7 @@ function readMoreInformation(){
     }  
 };
 
-// función que hace que se despiliege más infomación al pulsar al Read More
+//Despiliega más infomación al pulsar al Read More
 function addMore(event){
     const elementReadMore= event.currentTarget;
     if(elementReadMore.innerHTML === 'Read more'){
@@ -116,7 +115,7 @@ function addMore(event){
     eventLiParent.classList.toggle('new-size');
 };
 
-// longitud de párrafo
+//Longitud de párrafo
 function textLengt(text, textDefault, hiddenText){
     if(text.length > 100){
         const textVisible= text.substr(0, 140) + '...';
@@ -124,7 +123,7 @@ function textLengt(text, textDefault, hiddenText){
         hiddenText.innerHTML = text;
     }
 };
-//función para poner imagen por defecto, en el caso de que la ruta de la api sea null
+//Imagen por defecto, en el caso de que la ruta de la api sea null
 function defaultImage(pathImage, elementImg){
     if(pathImage== null){
         elementImg.src = imgDefault;
@@ -132,13 +131,13 @@ function defaultImage(pathImage, elementImg){
         elementImg.src= `https://image.tmdb.org/t/p/w500/${pathImage}`;
     }
 };
-//función nueva búsqueda
+//Nueva búsqueda, elimina los resultados de la anterior
 function removeSearch() {
     if(elementUlResults.innerHTML !== ''){
         elementUlResults.innerHTML = '';
     }
 };
-//función para que funcione la búsqueda pulsando la tecla enter
+//Búsqueda pulsando la tecla enter
 function enterKeySearchHandler (event){
     event.preventDefault();
     conectSearchHandler();
